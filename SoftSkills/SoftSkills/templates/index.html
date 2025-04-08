@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftSkills Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> SoftSkills Analyzer</h1>
+            <p>Analyze your facial expressions, voice tone, and speech to improve your soft skills</p>
+        </header>
+
+        <div class="main-content">
+            <div class="video-section">
+                <div class="video-container">
+                    <img id="videoElement" src="{{ url_for('video_feed') }}" alt="Video Stream">
+                    <div id="recording-indicator" class="hidden">
+                        <div class="pulse-ring"></div>
+                        <span>Recording...</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="startBtn" class="btn primary"><i class="fas fa-play"></i> Start Recording</button>
+                    <button id="stopBtn" class="btn secondary" disabled><i class="fas fa-stop"></i> Stop & Analyze</button>
+                </div>
+            </div>
+
+            <div class="results-section hidden" id="resultsContainer">
+                <h2>Analysis Results</h2>
+                
+                <div class="analysis-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-smile"></i>
+                            <h3>Emotion</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="emotionResult">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-comment"></i>
+                            <h3>Sentiment</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="sentimentResult">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-music"></i>
+                            <h3>Pitch</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="pitchResult">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-volume-up"></i>
+                            <h3>Intensity</h3>
+                        </div>
+                        <div class="card-body">
+                            <span id="intensityResult">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transcription-box">
+                    <h3><i class="fas fa-file-alt"></i> Speech Transcription</h3>
+                    <div id="transcriptionText">No speech detected</div>
+                </div>
+
+                <div class="score-section">
+                    <h3>Soft Skills Scores</h3>
+                    <div class="scores-container">
+                        <div class="score-item">
+                            <div class="score-label">Emotion Score</div>
+                            <div class="score-bar-container">
+                                <div class="score-bar" id="emotionScoreBar"></div>
+                                <span class="score-value" id="emotionScore">-/10</span>
+                            </div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Sentiment Score</div>
+                            <div class="score-bar-container">
+                                <div class="score-bar" id="sentimentScoreBar"></div>
+                                <span class="score-value" id="sentimentScore">-/10</span>
+                            </div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Pitch Score</div>
+                            <div class="score-bar-container">
+                                <div class="score-bar" id="pitchScoreBar"></div>
+                                <span class="score-value" id="pitchScore">-/10</span>
+                            </div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Intensity Score</div>
+                            <div class="score-bar-container">
+                                <div class="score-bar" id="intensityScoreBar"></div>
+                                <span class="score-value" id="intensityScore">-/10</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="final-score">
+                        <div class="final-score-circle">
+                            <span id="finalScore">-</span>
+                            <small>/10</small>
+                        </div>
+                        <h4>Final Soft Skills Score</h4>
+                    </div>
+                </div>
+
+                <div class="suggestions-section">
+                    <h3><i class="fas fa-lightbulb"></i> Improvement Suggestions</h3>
+                    <div class="suggestions-container" id="suggestionsText">
+                        Analyze yourself to get personalized improvement suggestions.
+                    </div>
+                </div>
+                
+                <button id="newAnalysisBtn" class="btn primary"><i class="fas fa-redo"></i> New Analysis</button>
+            </div>
+        </div>
+
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="spinner"></div>
+            <p>Analyzing your soft skills...</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 SoftSkills Analyzer | <a href="#" id="aboutLink">About</a></p>
+        </footer>
+    </div>
+
+    <div class="modal hidden" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2>About SoftSkills Analyzer</h2>
+            <p>SoftSkills Analyzer is an advanced tool that helps you improve your communication skills by analyzing your facial expressions, voice tone, and speech patterns.</p>
+            <p>The system uses machine learning models to evaluate your emotional expression, speech sentiment, voice pitch, and intensity to provide a comprehensive soft skills assessment.</p>
+            <p>Based on the analysis, the tool offers personalized suggestions to help you enhance your communication effectiveness in professional and personal settings.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 

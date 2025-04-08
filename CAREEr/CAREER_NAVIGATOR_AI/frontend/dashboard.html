@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Navigator AI - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #7c3aed;
+            --primary-dark: #6d28d9;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --gradient-primary: linear-gradient(135deg, #7c3aed, #6d28d9);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        .form-container {
+            background: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .btn-small {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .btn-small:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .recruiter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #studentBtn { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        #jobSeekerBtn { background: linear-gradient(135deg, #10b981, #059669); }
+        #recruiterBtn { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        
+        #candidateSearchBtn { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        #hiringAutomationBtn { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1><i class="fas fa-chart-line"></i> Welcome to Career Navigator AI</h1>
+            <p>Choose your role to get started on your career journey</p>
+            <div class="role-options">
+                <button id="studentBtn" class="btn">
+                    <i class="fas fa-graduation-cap"></i>
+                    Student
+                </button>
+                <button id="jobSeekerBtn" class="btn">
+                    <i class="fas fa-briefcase"></i>
+                    Job Seeker
+                </button>
+                <button id="recruiterBtn" class="btn">
+                    <i class="fas fa-users"></i>
+                    Recruiter
+                </button>
+            </div>
+            <div class="recruiter-options" style="display: none;">
+                <button id="candidateSearchBtn" class="btn">
+                    <i class="fas fa-search"></i>
+                    Candidate Search
+                </button>
+                <button id="hiringAutomationBtn" class="btn">
+                    <i class="fas fa-robot"></i>
+                    Hiring Automation
+                </button>
+            </div>
+            <button id="logoutBtn" class="btn-small">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

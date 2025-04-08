@@ -1,0 +1,62 @@
+User ID,Name,Role,Relevant Course,Certification Status,NFT Verification,NFT Tier,Years of Experience,Portfolio/GitHub,Education Level,University,Technical Skill Score,Soft Skill Score,Overall Assessment Score
+101,Alice Johnson,Data Analyst,Data Science Bootcamp,Yes,Yes,Platinum,3,github.com/alice,Master's,MIT,85,78,82
+102,Bob Smith,Machine Learning Engineer,AI & ML Certification,No,No,Silver,5,github.com/bobml,PhD,Stanford,90,80,85
+103,Charlie Brown,Software Engineer,Full Stack Web Dev,Yes,Yes,Gold,2,github.com/charliesw,Bachelor's,Harvard,75,70,73
+104,David Williams,Cybersecurity Specialist,Ethical Hacking Certification,Yes,Yes,Platinum,6,github.com/davidsec,Master's,UC Berkeley,88,82,85
+105,Emma Davis,Cloud Engineer,AWS Certified Solutions Architect,No,No,Silver,4,github.com/emmacloud,Bachelor's,Carnegie Mellon,80,75,78
+106,Frank Miller,DevOps Engineer,DevOps Professional Certification,Yes,Yes,Gold,7,github.com/frankdevops,PhD,Princeton,92,85,89
+107,Grace Wilson,AI Researcher,Deep Learning Specialization,Yes,Yes,Platinum,5,github.com/graceai,PhD,Oxford,95,90,93
+108,Henry Moore,Full Stack Developer,Web Development with React & Node,No,No,Silver,3,github.com/henryfstack,Bachelor's,Yale,78,72,75
+109,Ivy Anderson,Blockchain Developer,Blockchain & Smart Contracts,Yes,Yes,Gold,4,github.com/ivyblockchain,Master's,Cambridge,85,80,83
+110,Jack Thompson,Game Developer,Unity & Unreal Engine Game Dev,No,No,Silver,2,github.com/jackgames,Bachelor's,UCLA,70,68,69
+111,Kate Walker,Data Engineer,Big Data Analytics with Spark,Yes,Yes,Gold,6,github.com/katedata,Master's,Columbia,88,84,86
+112,Liam White,AI Ethics Specialist,AI & Society Ethics,No,No,Silver,5,github.com/liamai,PhD,Harvard,82,78,80
+113,Mia Scott,Mobile App Developer,Android & iOS Development,Yes,Yes,Platinum,4,github.com/miamobile,Bachelor's,Stanford,90,85,88
+114,Nathan Lee,Robotics Engineer,Robotics & Autonomous Systems,Yes,Yes,Platinum,7,github.com/nathanrobotics,PhD,MIT,95,88,92
+115,Olivia Harris,Embedded Systems Engineer,IoT & Embedded Systems,No,No,Silver,3,github.com/oliviaembedded,Bachelor's,UC Berkeley,76,72,74
+116,Patrick Young,Software Architect,Advanced System Design,Yes,Yes,Gold,10,github.com/patrickarch,PhD,Cambridge,98,92,95
+117,Quinn Lewis,Penetration Tester,Offensive Security Expert,No,No,Silver,5,github.com/quinnpentest,Master's,Yale,85,79,82
+118,Rachel Adams,AI Product Manager,AI in Product Management,Yes,Yes,Platinum,6,github.com/rachelpm,Bachelor's,Harvard,89,91,90
+119,Samuel Clark,VR Developer,Virtual Reality & AR Specialization,No,No,Silver,2,github.com/samvr,Bachelor's,Stanford,72,70,71
+120,Tina Foster,AI Consultant,AI for Business,Yes,Yes,Gold,8,github.com/tinaai,Master's,Columbia,91,87,89
+121,Uma Roberts,Cloud Security Specialist,Cloud Security Professional,Yes,Yes,Platinum,7,github.com/umacloud,PhD,MIT,94,89,92
+122,Victor Evans,Python Developer,Advanced Python Programming,No,No,Silver,3,github.com/victorpy,Bachelor's,UCLA,80,76,78
+123,Wendy Collins,Big Data Engineer,Data Lakes & Pipelines,Yes,Yes,Gold,6,github.com/wendydata,Master's,Carnegie Mellon,87,82,85
+124,Xavier Perez,AI Speech Engineer,AI Speech & NLP,No,No,Silver,4,github.com/xaviernlp,PhD,Oxford,86,81,84
+125,Yasmine Green,DevSecOps Engineer,Secure DevOps Certification,Yes,Yes,Platinum,8,github.com/yasminedevsec,Bachelor's,Princeton,93,88,91
+126,Zachary Brooks,AI Game Developer,AI in Game Development,No,No,Silver,2,github.com/zachgameai,Bachelor's,Yale,73,70,72
+127,Andrew Clarke,AI in Healthcare,AI for Medical Diagnostics,Yes,Yes,Gold,5,github.com/andrewmedai,Master's,Harvard,88,85,87
+128,Bella Martinez,Autonomous Systems Engineer,Self-Driving Cars & AI,No,No,Silver,6,github.com/bellasdc,PhD,Stanford,84,78,81
+129,Christopher Reed,Software Engineering Manager,Advanced Software Leadership,Yes,Yes,Platinum,10,github.com/chrislead,Bachelor's,Cambridge,99,95,97
+130,Diana Simmons,AI Hardware Engineer,AI Accelerator Chip Design,No,No,Silver,4,github.com/dianahardware,Master's,UC Berkeley,82,76,79
+User ID,Name,Role,Relevant Course,Certification Status,NFT Verification,NFT Tier,Years of Experience,Portfolio/GitHub,Education Level,University,Technical Skill Score,Soft Skill Score,Overall Assessment Score
+131,Ethan Brooks,Data Scientist,Advanced Data Science,Yes,Yes,Platinum,6,github.com/ethandata,PhD,MIT,92,88,90
+132,Fiona Carter,AI Engineer,Deep Learning with TensorFlow,No,No,Silver,3,github.com/fionaai,Bachelor's,Stanford,84,80,82
+133,George Harrison,Cloud Solutions Architect,Google Cloud Professional,Yes,Yes,Gold,5,github.com/georgecloud,Master's,Harvard,89,85,87
+134,Hannah Stewart,Software Developer,Java Full Stack Developer,No,No,Silver,2,github.com/hannahjava,Bachelor's,UC Berkeley,78,74,76
+135,Ian Foster,Security Analyst,Cybersecurity Fundamentals,Yes,Yes,Platinum,7,github.com/iansec,Master's,Yale,90,86,88
+136,Jasmine Roberts,Blockchain Expert,Decentralized Apps & Smart Contracts,No,No,Silver,4,github.com/jasmineblockchain,Bachelor's,Carnegie Mellon,82,78,80
+137,Kyle Griffin,AI Research Scientist,Neural Networks & AI Research,Yes,Yes,Gold,8,github.com/kyleai,PhD,Oxford,94,90,92
+138,Laura Parker,Frontend Developer,React & UI/UX Development,No,No,Silver,3,github.com/laurafront,Bachelor's,UCLA,80,76,78
+139,Michael Brown,Database Administrator,SQL & NoSQL Databases,Yes,Yes,Gold,6,github.com/michaeldb,Master's,Columbia,88,82,85
+140,Natalie Adams,Software Test Engineer,QA & Automated Testing,No,No,Silver,2,github.com/natalietest,Bachelor's,Princeton,75,72,74
+141,Oscar Mitchell,Embedded AI Engineer,AI on Edge Devices,Yes,Yes,Platinum,5,github.com/oscarai,Bachelor's,MIT,93,89,91
+142,Paula Watson,Data Visualization Specialist,Power BI & Tableau,No,No,Silver,4,github.com/paulaviz,Master's,Harvard,86,81,83
+143,Quincy Hughes,AI Ethics Consultant,Ethical AI & Bias Mitigation,Yes,Yes,Gold,6,github.com/quincyaiethics,PhD,Stanford,88,85,87
+144,Ryan Edwards,DevSecOps Engineer,Advanced Security in DevOps,No,No,Silver,5,github.com/ryandevsec,Bachelor's,UC Berkeley,85,79,82
+145,Sophia Clark,IoT Engineer,Connected Devices & IoT Security,Yes,Yes,Platinum,7,github.com/sophiaiot,Master's,Cambridge,92,88,90
+146,Travis Bennett,AI Game Programmer,AI for Game Development,No,No,Silver,3,github.com/travisgameai,Bachelor's,Yale,78,74,76
+147,Ursula Scott,Software Security Engineer,Secure Coding & Penetration Testing,Yes,Yes,Gold,5,github.com/ursulasec,Master's,Princeton,90,86,88
+148,Victor Ramirez,AI for Finance,AI & ML in Financial Markets,No,No,Silver,4,github.com/victorfinance,Bachelor's,Columbia,84,79,82
+149,Wanda Lopez,AI Chip Designer,Hardware Accelerators for AI,Yes,Yes,Platinum,6,github.com/wandaaihw,PhD,MIT,95,91,93
+150,Xander Coleman,Mobile Security Specialist,Secure Mobile App Development,No,No,Silver,2,github.com/xandermobile,Bachelor's,Harvard,79,74,77
+151,Yolanda Phillips,Data Governance Specialist,Data Privacy & Compliance,Yes,Yes,Gold,5,github.com/yolandadata,Bachelor's,Stanford,87,83,85
+152,Zane Foster,AI for Healthcare,AI in Medical Imaging,No,No,Silver,4,github.com/zanehealthai,Master's,Oxford,86,81,83
+153,Adam Carter,Python Backend Developer,Advanced Python for Web,Yes,Yes,Gold,6,github.com/adampy,Bachelor's,Carnegie Mellon,90,85,88
+154,Brianna Hill,VR UI Designer,VR & AR User Experience,No,No,Silver,3,github.com/briannavr,Bachelor's,UCLA,81,77,79
+155,Cody Wallace,ML Ops Engineer,Scaling ML in Production,Yes,Yes,Platinum,7,github.com/codymlops,Master's,MIT,94,89,92
+156,Denise Armstrong,AI for Robotics,AI Control Systems,No,No,Silver,4,github.com/deniserobotics,Bachelor's,Yale,85,80,82
+157,Elliot Ford,Software Security Analyst,Cyber Threat Intelligence,Yes,Yes,Gold,5,github.com/elliotsec,PhD,Harvard,89,84,86
+158,Felicity Hayes,3D Graphics Engineer,Real-Time Rendering & GPU Programming,No,No,Silver,3,github.com/felicity3d,Bachelor's,UC Berkeley,80,76,78
+159,Gabriel Turner,AI Policy Analyst,AI Regulations & Policy,Yes,Yes,Platinum,6,github.com/gabrielpolicy,Bachelor's,Cambridge,92,88,90
+160,Holly Dawson,Big Data Security Specialist,Securing Data Pipelines,No,No,Silver,5,github.com/hollydatasec,Master's,Princeton,84,79,82

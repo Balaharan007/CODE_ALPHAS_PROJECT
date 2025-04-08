@@ -1,0 +1,985 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #4285F4;
+            --secondary-color: #34A853;
+            --accent-color: #EA4335;
+            --background-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        .search-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .filter-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .candidate-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-tag {
+            background-color: #e1f5fe;
+            color: #0288d1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin: 0.2rem;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .nft-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .nft-platinum {
+            background: linear-gradient(135deg, #90A4AE, #CFD8DC);
+        }
+
+        .nft-gold {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+        }
+
+        .nft-silver {
+            background: linear-gradient(135deg, #BDBDBD, #E0E0E0);
+        }
+
+        .score-badge {
+            background: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
+
+        .rank-badge {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        select.form-select {
+            border-radius: 8px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .search-input {
+            border-radius: 8px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-search {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-search:hover {
+            background-color: #3367d6;
+        }
+
+        .filters-title {
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Recruiter Dashboard</h1>
+        
+        <div class="search-container">
+            <input type="text" id="jobSeekerSearch" class="search-input" placeholder="Search by role, skills, or domain (e.g., Data Analyst, Python, AI)">
+            <div class="text-center mt-3">
+                <button id="searchBtn" class="btn-search">Search Candidates</button>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <h4 class="filters-title">Filters</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Years of Experience</label>
+                        <select id="experienceFilter" class="form-select" multiple>
+                            <option value="1">1 year</option>
+                            <option value="2">2 years</option>
+                            <option value="3">3 years</option>
+                            <option value="4">4 years</option>
+                            <option value="5">5 years</option>
+                            <option value="6">6+ years</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">NFT Tier</label>
+                        <select id="nftTierFilter" class="form-select" multiple>
+                            <option value="Platinum">Platinum</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Technical Score</label>
+                        <select id="technicalScoreFilter" class="form-select">
+                            <option value="">Any Score</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Overall Score</label>
+                        <select id="overallScoreFilter" class="form-select">
+                            <option value="">Any Score</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchResults" class="search-results">
+             Results will be displayed here
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // CSV data will be loaded here
+        let candidates = [];
+
+        // Function to load CSV data
+        async function loadCSVData() {
+            try {
+                const response = await fetch('user_information.csv');
+                const csvText = await response.text();
+                const rows = csvText.split('\n').slice(1); // Skip header
+                candidates = rows.map(row => {
+                    const columns = row.split(',');
+                    return {
+                        name: columns[1],
+                        role: columns[2],
+                        nftVerification: columns[5],
+                        nftTier: columns[6],
+                        experience: parseInt(columns[7]),
+                        technicalScore: parseInt(columns[11]),
+                        softScore: parseInt(columns[12]),
+                        overallScore: parseInt(columns[13])
+                    };
+                });
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+            }
+        }
+
+        // Calculate rank based on scores and NFT tier
+        function calculateRank(candidate) {
+            let nftPoints = 0;
+            switch(candidate.nftTier.toLowerCase()) {
+                case 'platinum': nftPoints = 100; break;
+                case 'gold': nftPoints = 70; break;
+                case 'silver': nftPoints = 50; break;
+            }
+            
+            const totalScore = (
+                nftPoints + 
+                candidate.technicalScore + 
+                candidate.softScore + 
+                candidate.overallScore
+            ) / 4;
+            
+            return Math.round(totalScore);
+        }
+
+        // Function to filter candidates
+        function filterCandidates(searchQuery) {
+            const experienceFilters = Array.from($('#experienceFilter').val()).map(Number);
+            const nftTierFilters = $('#nftTierFilter').val();
+            const technicalScoreMin = parseInt($('#technicalScoreFilter').val()) || 0;
+            const overallScoreMin = parseInt($('#overallScoreFilter').val()) || 0;
+
+            return candidates.filter(candidate => {
+                const matchesSearch = !searchQuery || 
+                    candidate.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    candidate.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+                const matchesExperience = experienceFilters.length === 0 || 
+                    experienceFilters.includes(candidate.experience);
+
+                const matchesNFTTier = nftTierFilters.length === 0 || 
+                    nftTierFilters.includes(candidate.nftTier);
+
+                const matchesTechnicalScore = candidate.technicalScore >= technicalScoreMin;
+                const matchesOverallScore = candidate.overallScore >= overallScoreMin;
+
+                return matchesSearch && matchesExperience && matchesNFTTier && 
+                    matchesTechnicalScore && matchesOverallScore;
+            });
+        }
+
+        // Function to display results
+        function displayResults(filteredCandidates) {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+
+            if (filteredCandidates.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-center">No candidates found matching your criteria</p>';
+                return;
+            }
+
+            // Sort by rank
+            filteredCandidates.sort((a, b) => calculateRank(b) - calculateRank(a));
+
+            filteredCandidates.forEach(candidate => {
+                const rank = calculateRank(candidate);
+                const card = document.createElement('div');
+                card.className = 'candidate-card';
+                
+                const nftBadgeClass = `nft-badge nft-${candidate.nftTier.toLowerCase()}`;
+                
+                card.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>${candidate.name}</h3>
+                            <p class="mb-2"><strong>Role:</strong> ${candidate.role}</p>
+                            <p class="mb-2"><strong>Experience:</strong> ${candidate.experience} years</p>
+                            <span class="${nftBadgeClass}">${candidate.nftTier} NFT</span>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="rank-badge">Rank Score: ${rank}</div>
+                            <div class="score-badge">Technical Score: ${candidate.technicalScore}</div>
+                            <div class="score-badge">Soft Skills: ${candidate.softScore}</div>
+                            <div class="score-badge">Overall: ${candidate.overallScore}</div>
+                        </div>
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(card);
+            });
+        }
+
+        // Initialize
+        $(document).ready(function() {
+            // Initialize Select2 for multiple select
+            $('#experienceFilter, #nftTierFilter').select2({
+                placeholder: "Select options",
+                allowClear: true
+            });
+
+            // Load CSV data
+            loadCSVData();
+
+            // Search button click handler
+            $('#searchBtn').click(function() {
+                const searchQuery = $('#jobSeekerSearch').val();
+                const filteredCandidates = filterCandidates(searchQuery);
+                displayResults(filteredCandidates);
+            });
+
+            // Filter change handlers
+            $('#experienceFilter, #nftTierFilter, #technicalScoreFilter, #overallScoreFilter').change(function() {
+                const searchQuery = $('#jobSeekerSearch').val();
+                const filteredCandidates = filterCandidates(searchQuery);
+                displayResults(filteredCandidates);
+            });
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #7c3aed;
+            --primary-light: #8b5cf6;
+            --primary-dark: #6d28d9;
+            --secondary-color: #3b82f6; 
+            --secondary-light: #60a5fa;
+            --secondary-dark: #2563eb;
+            --accent-color: #f472b6;
+            --light-bg: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+            --gradient-blend: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            --gradient-light: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .search-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-container:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .filter-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-container:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .candidate-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .skill-tag {
+            background-color: rgba(124, 58, 237, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.2rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nft-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .nft-platinum {
+            background: linear-gradient(135deg, #6d28d9, #4f46e5);
+        }
+
+        .nft-gold {
+            background: linear-gradient(135deg, #eab308, #d97706);
+        }
+
+        .nft-silver {
+            background: linear-gradient(135deg, #94a3b8, #64748b);
+        }
+
+        .score-badge {
+            background: var(--light-bg);
+            padding: 0.7rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .score-badge:hover {
+            background: white;
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rank-badge {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        select.form-select {
+            border-radius: 8px;
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: none;
+            transition: all 0.2s ease;
+        }
+
+        select.form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+            outline: none;
+        }
+
+        .search-input {
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            font-size: 1rem;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+            outline: none;
+            background-color: white;
+        }
+
+        .btn-search {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-md);
+            margin-top: 1rem;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--primary-dark);
+        }
+
+        .filters-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .filters-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            height: 3px;
+            width: 40px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .filter-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            display: block;
+        }
+        
+        .search-results {
+            padding: 1rem;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .candidate-card {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+                text-align: center;
+            }
+            
+            .search-input, .btn-search {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Talent Recruiter Dashboard</h1>
+            <p>Find top verified candidates and filter by skills, experience, and performance metrics</p>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="jobSeekerSearch" class="search-input" placeholder="Search by role, skills, domain, or candidate name...">
+            <div class="text-center mt-4">
+                <button id="searchBtn" class="btn-search">Find Candidates</button>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <h4 class="filters-title">Advanced Filters</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Years of Experience</label>
+                        <select id="experienceFilter" class="form-select" multiple>
+                            <option value="1">1 year</option>
+                            <option value="2">2 years</option>
+                            <option value="3">3 years</option>
+                            <option value="4">4 years</option>
+                            <option value="5">5 years</option>
+                            <option value="6">6 years</option>
+                            <option value="7">7 years</option>
+                            <option value="8">8 years</option>
+                            <option value="9">9 years</option>
+                            <option value="10">10+ years</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">NFT Tier</label>
+                        <select id="nftTierFilter" class="form-select" multiple>
+                            <option value="Platinum">Platinum</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Technical Score</label>
+                        <select id="technicalScoreFilter" class="form-select">
+                            <option value="">Any Score</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                            <option value="60">60+</option>
+                            <option value="50">50+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Overall Score</label>
+                        <select id="overallScoreFilter" class="form-select">
+                            <option value="">Any Score</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                            <option value="60">60+</option>
+                            <option value="50">50+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Soft Skills Score</label>
+                        <select id="softScoreFilter" class="form-select">
+                            <option value="">Any Score</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                            <option value="60">60+</option>
+                            <option value="50">50+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Minimum Rank</label>
+                        <select id="rankFilter" class="form-select">
+                            <option value="">Any Rank</option>
+                            <option value="90">90+</option>
+                            <option value="80">80+</option>
+                            <option value="70">70+</option>
+                            <option value="60">60+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultsCount" class="results-count" style="display: none;"></div>
+        
+        <div id="searchResults" class="search-results">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // Data store
+        let candidates = [];
+
+        // Function to load CSV data
+        async function loadCSVData() {
+            try {
+                const response = await fetch('user_information.csv');
+                const csvText = await response.text();
+                const rows = csvText.split('\n');
+                
+                // Skip header and empty rows
+                candidates = rows.filter(row => row.trim() !== '')
+                               .slice(1)
+                               .map(row => {
+                    const columns = row.split(',');
+                    return {
+                        id: columns[0],
+                        name: columns[1],
+                        role: columns[2],
+                        email: columns[3],
+                        phone: columns[4],
+                        nftVerification: columns[5],
+                        nftTier: columns[6],
+                        experience: parseInt(columns[7]) || 0,
+                        skills: columns[8],
+                        domain: columns[9],
+                        bio: columns[10],
+                        technicalScore: parseInt(columns[11]) || 0,
+                        softScore: parseInt(columns[12]) || 0,
+                        overallScore: parseInt(columns[13]) || 0
+                    };
+                });
+                
+                console.log(`Loaded ${candidates.length} candidates from CSV file`);
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                alert('Failed to load candidate data. Please check console for details.');
+            }
+        }
+
+        // Calculate rank based on scores and NFT tier
+        function calculateRank(candidate) {
+            let nftPoints = 0;
+            if (candidate.nftTier) {
+                switch(candidate.nftTier.toLowerCase()) {
+                    case 'platinum': nftPoints = 100; break;
+                    case 'gold': nftPoints = 70; break;
+                    case 'silver': nftPoints = 50; break;
+                    default: nftPoints = 0;
+                }
+            }
+            
+            const totalScore = (
+                nftPoints + 
+                candidate.technicalScore + 
+                candidate.softScore + 
+                candidate.overallScore
+            ) / 4;
+            
+            return Math.round(totalScore);
+        }
+
+        // Function to filter candidates
+        function filterCandidates(searchQuery) {
+            const experienceFilters = Array.from($('#experienceFilter').val()).map(Number);
+            const nftTierFilters = $('#nftTierFilter').val();
+            const technicalScoreMin = parseInt($('#technicalScoreFilter').val()) || 0;
+            const softScoreMin = parseInt($('#softScoreFilter').val()) || 0;
+            const overallScoreMin = parseInt($('#overallScoreFilter').val()) || 0;
+            const rankMin = parseInt($('#rankFilter').val()) || 0;
+
+            return candidates.filter(candidate => {
+                // Calculate rank for rank filtering
+                const candidateRank = calculateRank(candidate);
+                
+                // Check search query match (case insensitive)
+                const searchTerms = searchQuery ? searchQuery.toLowerCase().split(' ') : [];
+                const matchesSearch = !searchQuery || searchTerms.some(term => 
+                    candidate.role?.toLowerCase().includes(term) ||
+                    candidate.name?.toLowerCase().includes(term) ||
+                    candidate.skills?.toLowerCase().includes(term) ||
+                    candidate.domain?.toLowerCase().includes(term)
+                );
+
+                // Check experience filter
+                const matchesExperience = experienceFilters.length === 0 || 
+                    experienceFilters.includes(candidate.experience);
+
+                // Check NFT tier filter
+                const matchesNFTTier = nftTierFilters.length === 0 || 
+                    (candidate.nftTier && nftTierFilters.includes(candidate.nftTier));
+
+                // Check score filters
+                const matchesTechnicalScore = candidate.technicalScore >= technicalScoreMin;
+                const matchesSoftScore = candidate.softScore >= softScoreMin;
+                const matchesOverallScore = candidate.overallScore >= overallScoreMin;
+                const matchesRank = candidateRank >= rankMin;
+
+                return matchesSearch && matchesExperience && matchesNFTTier && 
+                    matchesTechnicalScore && matchesSoftScore && 
+                    matchesOverallScore && matchesRank;
+            });
+        }
+
+        // Function to display results
+        function displayResults(filteredCandidates) {
+            const resultsContainer = document.getElementById('searchResults');
+            const resultsCountElement = document.getElementById('resultsCount');
+            
+            resultsContainer.innerHTML = '';
+
+            if (filteredCandidates.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results"><p>No candidates found matching your criteria</p><p>Try adjusting your search terms or filters</p></div>';
+                resultsCountElement.style.display = 'none';
+                return;
+            }
+
+            // Sort by rank (highest first)
+            filteredCandidates.sort((a, b) => calculateRank(b) - calculateRank(a));
+
+            // Display count
+            resultsCountElement.textContent = `Found ${filteredCandidates.length} matching candidates`;
+            resultsCountElement.style.display = 'inline-block';
+
+            // Create and append candidate cards
+            filteredCandidates.forEach((candidate, index) => {
+                const rank = calculateRank(candidate);
+                const card = document.createElement('div');
+                card.className = 'candidate-card';
+                
+                // Set border color based on rank
+                if (rank >= 90) {
+                    card.style.borderLeft = '5px solid #4CAF50'; // Green for top tier
+                } else if (rank >= 80) {
+                    card.style.borderLeft = '5px solid #2196F3'; // Blue for high tier
+                } else if (rank >= 70) {
+                    card.style.borderLeft = '5px solid #FFC107'; // Yellow for mid tier
+                } else {
+                    card.style.borderLeft = '5px solid #9E9E9E'; // Grey for lower tier
+                }
+                
+                // Determine NFT badge class
+                const nftTier = candidate.nftTier || 'None';
+                const nftBadgeClass = nftTier !== 'None' ? 
+                    `nft-badge nft-${nftTier.toLowerCase()}` : '';
+                
+                const nftBadgeHTML = nftTier !== 'None' ? 
+                    `<span class="${nftBadgeClass}">${nftTier} NFT Verified</span>` : '';
+                
+                // Generate skills tags if available
+                let skillsHTML = '';
+                if (candidate.skills) {
+                    const skillsList = candidate.skills.split(';');
+                    skillsHTML = skillsList.map(skill => 
+                        `<span class="skill-tag">${skill.trim()}</span>`
+                    ).join(' ');
+                }
+                
+                card.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="candidate-name">${candidate.name}</h3>
+                            <h4 class="candidate-role">${candidate.role}</h4>
+                            <p class="candidate-info"><strong>Experience:</strong> ${candidate.experience} years</p>
+                            <p class="candidate-info"><strong>Domain:</strong> ${candidate.domain || 'Not specified'}</p>
+                            ${nftBadgeHTML}
+                            <div class="mt-3">${skillsHTML}</div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="rank-badge">Rank Score: ${rank}</div>
+                            <div class="score-badge">Technical Skills: ${candidate.technicalScore}/100</div>
+                            <div class="score-badge">Soft Skills: ${candidate.softScore}/100</div>
+                            <div class="score-badge">Overall Assessment: ${candidate.overallScore}/100</div>
+                        </div>
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(card);
+            });
+        }
+
+        // Initialize
+        $(document).ready(function() {
+            // Initialize Select2 for multiple select
+            $('#experienceFilter, #nftTierFilter').select2({
+                placeholder: "Select options",
+                allowClear: true,
+                width: '100%'
+            });
+
+            // Load CSV data
+            loadCSVData().then(() => {
+                // Auto-search once data is loaded for initial display
+                setTimeout(() => {
+                    const filteredCandidates = filterCandidates('');
+                    displayResults(filteredCandidates);
+                }, 500);
+            });
+
+            // Search button click handler
+            $('#searchBtn').click(function() {
+                const searchQuery = $('#jobSeekerSearch').val();
+                const filteredCandidates = filterCandidates(searchQuery);
+                displayResults(filteredCandidates);
+            });
+
+            // Allow Enter key to search
+            $('#jobSeekerSearch').keypress(function(event) {
+                if (event.keyCode === 13) {
+                    $('#searchBtn').click();
+                }
+            });
+
+            // Filter change handlers
+            $('#experienceFilter, #nftTierFilter, #technicalScoreFilter, #softScoreFilter, #overallScoreFilter, #rankFilter')
+                .change(function() {
+                    const searchQuery = $('#jobSeekerSearch').val();
+                    const filteredCandidates = filterCandidates(searchQuery);
+                    displayResults(filteredCandidates);
+                });
+        });
+    </script>
+</body>
+</html>
